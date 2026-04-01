@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daily Bugle |</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #ece7de;
+      color: #111;
+      font-family: Georgia, "Times New Roman", serif;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .utility-bar {
+      background: #111;
+      color: #f5f5f5;
+      font-family: Arial, sans-serif;
+      font-size: 0.8rem;
+      padding: 8px 18px;
+      text-align: center;
+      letter-spacing: 0.3px;
+    }
+
+    .paper {
+      max-width: 1240px;
+      margin: 18px auto 36px;
+      background: #f8f4ec;
+      border: 1px solid #bdb4a8;
+      box-shadow: 0 10px 28px rgba(0,0,0,0.12);
+    }
+
+    .topline {
+      border-bottom: 1px solid #c9c0b4;
+      padding: 10px 24px;
+      font-family: Arial, sans-serif;
+      font-size: 0.78rem;
+      color: #444;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .masthead {
+      text-align: center;
+      padding: 20px 24px 16px;
+      border-bottom: 4px solid #111;
+      background: #f8f4ec;
+    }
+
+    .masthead .name {
+      font-size: 3.8rem;
+      line-height: 1;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .masthead .sub {
+      margin-top: 8px;
+      font-family: Arial, sans-serif;
+      font-size: 0.82rem;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: #555;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: center;
+      gap: 22px;
+      padding: 12px 20px;
+      border-bottom: 1px solid #c9c0b4;
+      font-family: Arial, sans-serif;
+      font-size: 0.86rem;
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+      flex-wrap: wrap;
+      background: #f3eee5;
+    }
+
+    .notice {
+      margin: 18px 24px 0;
+      padding: 14px 16px;
+      background: #fff5c9;
+      border: 1px solid #d8c76d;
+      font-family: Arial, sans-serif;
+      font-size: 0.94rem;
+      line-height: 1.5;
+    }
+
+    .breaking-bar {
+      margin: 14px 24px 0;
+      background: #8d0f0f;
+      color: #fff;
+      padding: 10px 14px;
+      font-family: Arial, sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+    }
+
+    .breaking-bar span {
+      background: #fff;
+      color: #8d0f0f;
+      padding: 2px 7px;
+      margin-right: 10px;
+      font-weight: 800;
+      display: inline-block;
+    }
+
+    .content {
+      padding: 20px 24px 32px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 2.2fr 1fr;
+      gap: 26px;
+      align-items: start;
+      margin-bottom: 26px;
+    }
+
+    .lead-story {
+      border-right: 1px solid #d2c8bc;
+      padding-right: 26px;
+    }
+
+    .label {
+      font-family: Arial, sans-serif;
+      font-size: 0.74rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #666;
+      margin-bottom: 8px;
+    }
+
+    h1 {
+      font-size: 3.15rem;
+      line-height: 0.98;
+      margin: 0 0 12px;
+      font-weight: 700;
+    }
+
+    h2 {
+      font-size: 1.35rem;
+      line-height: 1.15;
+      margin: 0 0 8px;
+      font-weight: 700;
+    }
+
+    h3 {
+      font-size: 1rem;
+      line-height: 1.2;
+      margin: 0 0 8px;
+      font-weight: 700;
+      font-family: Arial, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .meta {
+      font-family: Arial, sans-serif;
+      color: #666;
+      font-size: 0.84rem;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    .lead-story img,
+    .side-story img,
+    .card img,
+    .feature-box img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+      margin: 12px 0 14px;
+      border: 1px solid #c8c0b4;
+    }
+
+    .lead-story img {
+      height: 380px;
+    }
+
+    .side-story img {
+      height: 150px;
+    }
+
+    .card img {
+      height: 180px;
+    }
+
+    .feature-box img {
+      height: 220px;
+    }
+
+    p {
+      font-size: 1rem;
+      line-height: 1.68;
+      margin: 0 0 14px;
+    }
+
+    .sidebar {
+      display: grid;
+      gap: 18px;
+    }
+
+    .side-story {
+      padding-bottom: 14px;
+      border-bottom: 1px solid #d7cdc0;
+    }
+
+    .quote-box,
+    .opinion-box,
+    .updates-box,
+    .feature-box {
+      border: 1px solid #cfc6b9;
+      background: #fbf8f2;
+      padding: 16px;
+      margin-top: 18px;
+    }
+
+    .quote-box {
+      background: #f4efe6;
+      font-style: italic;
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
+
+    .updates-box ul,
+    .opinion-box ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .updates-box li,
+    .opinion-box li {
+      margin-bottom: 10px;
+      line-height: 1.5;
+      font-size: 0.97rem;
+    }
+
+    .section-title {
+      margin: 30px 0 16px;
+      padding-top: 12px;
+      border-top: 3px solid #111;
+      font-family: Arial, sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .card {
+      border-top: 1px solid #cfc6b8;
+      padding-top: 12px;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 24px;
+      margin-top: 10px;
+    }
+
+    .footer {
+      border-top: 1px solid #b9b1a4;
+      padding: 18px 24px 26px;
+      font-family: Arial, sans-serif;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: #444;
+      background: #f1ece3;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .cards,
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+
+      .lead-story {
+        border-right: none;
+        padding-right: 0;
+      }
+
+      h1 {
+        font-size: 2.3rem;
+      }
+
+      .masthead .name {
+        font-size: 2.7rem;
+      }
+
+      .lead-story img {
+        height: 240px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="utility-bar">
+    PUBLIC ADVISORY
+  </div>
+
+  <div class="paper">
+    <div class="topline">
+      <div>Wednesday, April 1, 2026</div>
+      <div>Sacramento Edition</div>
+      <div>Morning Report</div>
+    </div>
+
+    <header class="masthead">
+      <div class="name">Daily Bugle</div>
+      <div class="sub">Metro News, Riverfront Watch, and Public Conversation</div>
+    </header>
+
+    <nav class="nav">
+      <a href="#">News</a>
+      <a href="#">Metro</a>
+      <a href="#">Environment</a>
+      <a href="#">Politics</a>
+      <a href="#">Opinion</a>
+      <a href="#">Culture</a>
+      <a href="#">Weather</a>
+    </nav>
+
+
+
+    <div class="breaking-bar">
+      <span>Latest</span>
+      EPA to Review San Francisco Bay Nutrient Watershed Permit and Evaluate Expanded Source Control Measures
+    </div>
+
+    <main class="content">
+      <section class="hero-grid">
+        <article class="lead-story">
+          <div class="label">Environment</div>
+          <h1>Mysterious Green Bloom Reported Along Sacramento Riverfront as Residents Debate Whether It Is Dangerous or Merely "Visually Committed"</h1>
+          <div class="meta">By Staff Reporter • Sacramento • April 1, 2026</div>
+
+          <img src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?q=80&w=1600&auto=format&fit=crop" alt="River scene">
+
+          <p>
+            Morning activity along the Sacramento Riverfront slowed considerably Tuesday after residents reported an unusually vivid green discoloration in the water, triggering a chain reaction of speculation, dramatic photo sharing, and several highly confident interpretations from people with no identifiable scientific training.
+          </p>
+
+          <p>
+            The color shift, described by onlookers as "aggressively green," "too saturated for comfort," and "the exact shade of a smoothie that costs extra," quickly became the dominant topic in nearby apartment buildings, office lobbies, coffee shops, and neighborhood group chats.
+          </p>
+
+          <p>
+            Several witnesses said the water appeared brighter than normal in the morning light and seemed, at minimum, to be behaving in a way that demanded commentary. One jogger said the river looked "less like nature and more like a beverage with marketing support," while another resident suggested it had "the emotional tone of a public works problem."
+          </p>
+
+          <p>
+            Within an hour, social media users had assembled an informal body of theories ranging from warm weather and runoff to "a very confident duck-related situation." None of those explanations were verified, and this page itself is part of an April Fools parody rather than an actual report of a public safety event.
+          </p>
+
+          <p>
+            Downtown commuters reported seeing clusters of people pause along the waterfront to stare, photograph, zoom in, and then immediately forward low-resolution images to friends accompanied by phrases such as "have you seen this?" and "is this normal?" A number of responses were reportedly immediate, forceful, and unsupported by evidence.
+          </p>
+
+          <p>
+            The most widely shared descriptions compared the river to matcha, pond paint, pistachio milk, sports drink concentrate, and "something a wellness influencer would swear by but not explain." One office worker said the scene felt "deeply suspicious, but also kind of seasonal."
+          </p>
+
+          <div class="quote-box">
+            "It had the energy of a problem, but the color palette of a rebrand." — unnamed riverfront resident, speaking with more confidence than data
+          </div>
+
+          <p>
+            As discussion spread, so did the tone of the commentary. What began as mild curiosity reportedly hardened into theatrical concern in some circles, while others treated the entire spectacle as a chance to produce the strongest possible one-liner before 9 a.m. Local ducks, meanwhile, were observed continuing normal operations.
+          </p>
+
+          <p>
+            No verified emergency notice, public health order, or environmental bulletin is connected to this article. The purpose of this page is parody. Anyone seeking actual river conditions, algae advisories, or water quality information should consult official city, county, or state sources rather than a fictional newspaper mockup named after a comic-book tabloid.
+          </p>
+
+          <div class="feature-box">
+            <h3>At a glance</h3>
+            <ul>
+              <li>This page is satire for April Fools.</li>
+              <li>The "algae bloom" described here is fictional.</li>
+              <li>The reactions, quotes, and observations are intentionally humorous.</li>
+              <li>Use real environmental agencies for actual river safety information.</li>
+            </ul>
+          </div>
+        </article>
+
+        <aside class="sidebar">
+          <article class="side-story">
+            <div class="label">Eyewitness</div>
+            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200&auto=format&fit=crop" alt="Waterfront">
+            <h2>Residents compare river color to "matcha," "liquid lawn," and "a suspiciously healthy milkshake"</h2>
+            <div class="meta">2 min read</div>
+            <p>Descriptions varied in wording, but not in concern that the river was doing "a lot."</p>
+          </article>
+
+          <article class="side-story">
+            <div class="label">Wildlife</div>
+            <img src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?q=80&w=1200&auto=format&fit=crop" alt="Ducks on water">
+            <h2>Local ducks remain calm, observant, and notably unavailable for comment</h2>
+            <div class="meta">1 min read</div>
+            <p>Bird activity appeared ordinary, though witnesses insisted the ducks looked "a little too composed."
+          </p>
+          </article>
+
+          <div class="updates-box">
+            <h3>Live updates</h3>
+            <ul>
+              <li>7:12 a.m. — First blurry waterfront photo enters neighborhood group chat.</li>
+              <li>7:19 a.m. — Someone says "this can't be good" without elaboration.</li>
+              <li>7:26 a.m. — Three new theories appear, none related to water science.</li>
+              <li>7:41 a.m. — A resident describes the river as "premium pea soup."</li>
+              <li>8:03 a.m. — Commuters begin taking photos from slightly different angles.</li>
+              <li>8:27 a.m. — This page continues to be a parody and not a real advisory.</li>
+            </ul>
+          </div>
+
+          <div class="opinion-box">
+            <h3>Public reaction themes</h3>
+            <ul>
+              <li>Concern that the river looked "too intentional." </li>
+              <li>Debate over whether the color was ominous or merely overachieving.</li>
+              <li>Unexpected admiration for how photogenic the whole thing appeared.</li>
+              <li>General agreement that someone should probably know something.</li>
+            </ul>
+          </div>
+        </aside>
+      </section>
+
+      <div class="section-title">More Coverage</div>
+
+      <section class="cards">
+        <article class="card">
+          <img src="https://images.unsplash.com/photo-1521207418485-99c705420785?q=80&w=1200&auto=format&fit=crop" alt="Water close up">
+          <div class="label">Public Reaction</div>
+          <h2>Group chat confusion spreads faster than facts before 8 a.m.</h2>
+          <div class="meta">Digital Desk</div>
+          <p>
+            Residents reportedly moved from uncertainty to certainty in under eleven minutes, aided by poor image quality and strong opinions.
+          </p>
+        </article>
+
+        <article class="card">
+          <img src="https://images.unsplash.com/photo-1473448912268-2022ce9509d8?q=80&w=1200&auto=format&fit=crop" alt="Skyline and water">
+          <div class="label">City Life</div>
+          <h2>Commuters describe waterfront as "beautiful, unsettling, and weirdly photogenic"</h2>
+          <div class="meta">Metro Staff</div>
+          <p>
+            Several downtown workers said the scene felt less like a hazard and more like an extremely committed seasonal campaign.
+          </p>
+        </article>
+
+        <article class="card">
+          <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop" alt="Nature">
+          <div class="label">Analysis</div>
+          <h2>Experts decline to weigh in on whether the river is toxic or just seeking attention</h2>
+          <div class="meta">Features</div>
+          <p>
+            The only confirmed fact remains that this page is parody and should not be treated as real reporting.
+          </p>
+        </article>
+      </section>
+
+      <div class="section-title">Inside the story</div>
+
+      <section class="two-col">
+        <div>
+          <p>
+            Residents living near the river said the event fit neatly into a familiar local pattern: someone notices something odd, several more people confirm it from different balconies, a handful of photos circulate, and by the time anyone attempts to separate fact from enthusiasm, the conversation has developed a life of its own.
+          </p>
+
+          <p>
+            One recurring theme in the public response was not simply alarm, but a kind of offended fascination. Many people did not seem entirely convinced the river posed a threat, but they were strongly of the opinion that it was behaving in a way that warranted scrutiny. In practical terms, that meant stopping mid-walk, narrowing one's eyes, and sending a photo with the caption, "Please explain this."
+          </p>
+
+          <p>
+            Others treated the discoloration as less of a hazard and more of a branding exercise. A number of comments framed the scene as "eco-core," "municipal surrealism," or "the natural endpoint of spring aesthetics." A smaller but louder group insisted the entire thing looked expensive.
+          </p>
+
+          <p>
+            The Daily Bugle, in the spirit of responsible fictional journalism, would like to reiterate that none of this should be interpreted as a real environmental bulletin. The river described in this page is participating in a joke. The quotes are invented. The urgency is theatrical. The structure is intentionally newspaper-like, but the substance is satirical.
+          </p>
+        </div>
+
+        <div class="feature-box">
+          <img src="https://images.unsplash.com/photo-1502082553048-f009c37129b9?q=80&w=1200&auto=format&fit=crop" alt="Riverbank trees">
+          <h3>Editorial note</h3>
+          <p>
+            This mock article is written to resemble a feature-heavy metro newspaper page for comedic effect. It should not be relied on for decisions about recreation, health, water contact, or public safety.
+          </p>
+          <p>
+            In other words: please enjoy the bit, but do not treat the bit like a bulletin.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <strong>Daily Bugle</strong> — fictional parody page for April Fools. Not a real newspaper, government notice, or environmental advisory. For real river or water quality information, check official local and state sources.
+    </footer>
+  </div>
+</body>
+</html>
